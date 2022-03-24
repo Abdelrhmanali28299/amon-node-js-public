@@ -18,6 +18,22 @@ const CoinRouter = {
     ctx.body = await CoinController.getCoinByCode(formattedParams.coinCode);
   },
 
+  schemaCreateCoin: Joi.object({
+    name: Joi.string().required(),
+    code: Joi.string().required().min(3).uppercase().max(5),
+  }),
+
+  async createCoin(ctx) {
+    const params = {
+      name: ctx.request.body.name,
+      code: ctx.request.body.code,
+    };
+
+    const formattedParams = await validateParams(CoinRouter.schemaCreateCoin, params);
+
+    ctx.body = await CoinController.createCoin(formattedParams);
+  },
+
   router() {
     const router = Router();
 
@@ -31,6 +47,18 @@ const CoinRouter = {
      *
      */
     router.get('/:coinCode', CoinRouter.getCoinByCode);
+
+
+    /**
+     * @api {put} /createCoin Create Coin
+     * @apiName createCoin
+     * @apiGroup Status
+     * @apiDescription Create Coin
+     *
+     * @apiSampleRequest /
+     *
+     */
+     router.put('/createCoin', CoinRouter.createCoin);
 
     return router;
   },

@@ -18,7 +18,17 @@ describe('Controller: Coin', () => {
   });
 
   describe('getCoinByCode', () => {
-    it('should get coin by code', async () => {
+    it('Should fail to get coin by code if code not exist in CoinGecko', async () => {
+      const coinCode = 'BTC';
+      expect(CoinController.getCoinByCode(coinCode)).to.be.rejectedWith(Error, 'coin_price_api_not_found');
+    });
+
+    it('Should fail to get coin by code if CoinGecko returned To Many Requests Status Code', async () => {
+      const coinCode = 'BTC';
+      expect(CoinController.getCoinByCode(coinCode)).to.be.rejectedWith(Error, 'coin_price_api_rate_limit');
+    });
+    
+    it('Should get coin by code', async () => {
       const coinCode = 'BTC';
       const coin = await CoinController.getCoinByCode(coinCode);
 
@@ -26,9 +36,30 @@ describe('Controller: Coin', () => {
       expect(Object.keys(coin).length).to.eq(3);
     });
 
-    it('should fail get coin by code', async () => {
+    it('Should fail get coin by code', async () => {
       const coinCode = 'AMN';
       expect(CoinController.getCoinByCode(coinCode)).to.be.rejectedWith(Error, 'unknown_coin_code');
     });
+  });
+
+  describe('createCoin', () => {
+    it('Should create coin', async () => {
+      const coinData = { code: 'DOGE', name: 'Dogecoin' };
+      const coin = await CoinController.createCoin(coinData);
+
+      expect(coin.code).to.eq(coinData.code);
+      expect(Object.keys(coin).length).to.eq(2);
+    });
+
+    it('Should fail to create coin if coin code exist', async () => {
+      const coinData = { code: 'DOGE', name: 'Dogecoin' };
+      const coin = await CoinController.createCoin(coinData);
+
+      expect(coin.code).to.eq(coinData.code);
+      expect(Object.keys(coin).length).to.eq(2);
+
+      expect(CoinController.createCoin(coinData)).to.be.rejectedWith(Error, 'coin_code_exists');
+    });
+    5;
   });
 });

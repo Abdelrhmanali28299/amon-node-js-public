@@ -76,7 +76,7 @@ describe('Module: Logger format', () => {
   });
 
   describe('formatMeta', () => {
-    it('should format Meta without any extra', () => {
+    it('Should format Meta without any extra', () => {
       const info = {
         level: 'info',
         message: 'message1',
@@ -91,7 +91,7 @@ describe('Module: Logger format', () => {
       });
     });
 
-    it('should format Meta without with meta', () => {
+    it('Should format Meta without with meta', () => {
       const info = {
         level: 'info',
         message: 'message1',
@@ -114,7 +114,7 @@ describe('Module: Logger format', () => {
       });
     });
 
-    it('should format Meta without with meta and error', () => {
+    it('Should format Meta without with meta and error', () => {
       const info = {
         level: 'error',
         message: 'message1',

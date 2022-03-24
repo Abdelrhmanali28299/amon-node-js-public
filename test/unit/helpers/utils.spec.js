@@ -476,7 +476,7 @@ describe('Helpers: Utils', () => {
     expect(onError.args[1][0].message).to.eq('20002');
   });
 
-  it('asyncMap should throw error missing param', async () => {
+  it('asyncMap Should throw error missing param', async () => {
     const array = [100, 200];
 
     async function fn(time) {

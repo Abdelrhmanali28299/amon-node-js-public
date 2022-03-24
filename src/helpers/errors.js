@@ -92,6 +92,21 @@ const ERRORS = [
     status: 413,
     description: 'The files you are trying to upload are too big.',
   },
+  {
+    code: 'coin_code_exists',
+    status: 400,
+    description: 'Coin Code must be unique',
+  },
+  {
+    code: 'coin_price_api_not_found',
+    status: 400,
+    description: 'An Error Occurred while Get Coin Price',
+  },
+  {
+    code: 'coin_price_api_rate_limit',
+    status: 400,
+    description: 'An Error Occurred while Get Coin Price, Try Again Later',
+  },
 
   // Internal
   {

@@ -66,7 +66,7 @@ describe('Middleware: Logger', () => {
     expect(loginfo.args[0][1]).to.deep.eq(Object.assign({ service: 'api:logger' }, ctx.requestInfo));
   });
 
-  it('should log device info', async () => {
+  it('Should log device info', async () => {
     const loginfo = sandbox.stub(logger, 'verbose');
 
     const next = sinon.stub();
