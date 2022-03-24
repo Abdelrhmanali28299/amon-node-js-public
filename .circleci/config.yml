@@ -30,7 +30,7 @@ jobs:
       - run:
           name: send report
           command: |
-            export CODECOV_TOKEN="e4efc334-9e28-4dcf-a9a2-d75c1556d4db"
+            export CODECOV_TOKEN="eeffa241-cf36-4696-bc55-27e6085a341e"
             bash <(curl -s https://codecov.io/bash)
 
 workflows:

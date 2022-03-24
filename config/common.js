@@ -23,6 +23,12 @@ const getConfigObject = (sourceConfig) => ({
     LOGZIO_KEY: configParser(sourceConfig, 'string', 'LOG_LOGZIO_KEY', null),
   },
   SERVICES: servicesConfig.getConfigObject(sourceConfig),
+  COINGECKO_COIN_DETAILS_URL: configParser(
+    sourceConfig,
+    'string',
+    'COINGECKO_COIN_DETAILS_URL',
+    'https://api.coingecko.com/api/v3/coins'
+  ),
 });
 
 module.exports = {

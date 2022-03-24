@@ -18,7 +18,7 @@ describe('Model:coin', () => {
     sandbox && sandbox.restore();
   });
 
-  it('Should create', async () => {
+  it('Should create without price', async () => {
     const coin = await Models.Coin.create({
       name: 'Bitcoin Cash',
       code: 'BCH',
@@ -26,6 +26,34 @@ describe('Model:coin', () => {
 
     expect(coin.name).to.eq('Bitcoin Cash');
     expect(coin.code).to.eq('BCH');
+    expect(coin.price).to.be.undefined;
+  });
+
+  it('Should create with price', async () => {
+    const coin = await Models.Coin.create({
+      name: 'Bitcoin Cash',
+      code: 'BCH',
+      price: '7845.5',
+    });
+
+    expect(coin.name).to.eq('Bitcoin Cash');
+    expect(coin.code).to.eq('BCH');
+    expect(coin.price).to.eq('7845.5');
+  });
+
+  it('Should fail to create coin if coin code exist', async () => {
+    const coinData = {
+      name: 'Dogecoin',
+      code: 'DOGE',
+    };
+    const firstTime = await Models.Coin.create(coinData);
+    const secondTime = Models.Coin.create(coinData);
+
+    expect(firstTime.name).to.eq('Dogecoin');
+    expect(firstTime.code).to.eq('DOGE');
+    expect(firstTime.price).to.be.undefined;
+
+    expect(secondTime).to.be.rejectedWith(Error, 'Validation error');
   });
 
   it('Should find by coinCode', async () => {
@@ -39,6 +67,7 @@ describe('Model:coin', () => {
     const coin = await Models.Coin.create({
       name: 'Amon',
       code: 'AMN',
+      price: '15.8',
     });
 
     const filterCoin = coin.filterKeys();
