@@ -1,6 +1,6 @@
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
-const config = require('../config')
+const config = require('../config');
 
 // This sets the mock adapter on the default instance
 const mock = new MockAdapter(axios);
@@ -8,7 +8,7 @@ const mock = new MockAdapter(axios);
 // Mock GET request to /users when param `searchText` is 'John'
 // arguments for reply are (status, data, headers)
 
-const GetCoinPriceURL = new RegExp(`${config.COINGECKO_COIN_DETAILS_URL}/.*`)
+const GetCoinPriceURL = new RegExp(`${config.COINGECKO_COIN_DETAILS_URL}/.*`);
 
 mock
   .onGet(GetCoinPriceURL)

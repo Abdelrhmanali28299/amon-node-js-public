@@ -33,20 +33,19 @@ describe('Model:coin', () => {
     const coin = await Models.Coin.create({
       name: 'Bitcoin Cash',
       code: 'BCH',
-      price: "7845.5"
+      price: '7845.5',
     });
 
     expect(coin.name).to.eq('Bitcoin Cash');
     expect(coin.code).to.eq('BCH');
     expect(coin.price).to.eq('7845.5');
-
   });
 
   it('Should fail to create coin if coin code exist', async () => {
     const coinData = {
       name: 'Dogecoin',
       code: 'DOGE',
-    }
+    };
     const firstTime = await Models.Coin.create(coinData);
     const secondTime = Models.Coin.create(coinData);
 
@@ -68,7 +67,7 @@ describe('Model:coin', () => {
     const coin = await Models.Coin.create({
       name: 'Amon',
       code: 'AMN',
-      price: "15.8"
+      price: '15.8',
     });
 
     const filterCoin = coin.filterKeys();

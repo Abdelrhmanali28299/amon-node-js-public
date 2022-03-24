@@ -27,7 +27,7 @@ describe('Controller: Coin', () => {
       const coinCode = 'BTC';
       expect(CoinController.getCoinByCode(coinCode)).to.be.rejectedWith(Error, 'coin_price_api_rate_limit');
     });
-    
+
     it('Should get coin by code', async () => {
       const coinCode = 'BTC';
       const coin = await CoinController.getCoinByCode(coinCode);

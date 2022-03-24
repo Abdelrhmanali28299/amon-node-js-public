@@ -1,13 +1,13 @@
 const axios = require('axios');
 const errors = require('./errors');
-const config = require('../../config')
+const config = require('../../config');
 
 module.exports = {
   async getCoinPrice(coin) {
     const price = await axios
       .get(`${config.COINGECKO_COIN_DETAILS_URL}/${coin}`)
-      .then(({data}) => {
-        return { data }
+      .then(({ data }) => {
+        return { data };
       })
       .catch((err) => {
         console.log(err.response.status);
