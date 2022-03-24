@@ -28,8 +28,21 @@ describe('Controller: Coin', () => {
       expect(CoinController.getCoinByCode(coinCode)).to.be.rejectedWith(Error, 'coin_price_api_rate_limit');
     });
 
+    it('Should fail to get coin by code if CoinGecko returned Internal Server Error or other unpredictable Status Code', async () => {
+      const coinCode = 'BTC';
+      expect(CoinController.getCoinByCode(coinCode)).to.be.rejectedWith(Error, 'coin_price_unknown_error');
+    });
+
     it('Should get coin by code', async () => {
       const coinCode = 'BTC';
+      const coin = await CoinController.getCoinByCode(coinCode);
+
+      expect(coin.code).to.eq(coinCode);
+      expect(Object.keys(coin).length).to.eq(3);
+    });
+
+    it('Should get coin by code with stored price', async () => {
+      const coinCode = 'BRAVE';
       const coin = await CoinController.getCoinByCode(coinCode);
 
       expect(coin.code).to.eq(coinCode);
@@ -60,6 +73,10 @@ describe('Controller: Coin', () => {
 
       expect(CoinController.createCoin(coinData)).to.be.rejectedWith(Error, 'coin_code_exists');
     });
-    5;
+
+    it('Should fail to create coin if coin name is null', async () => {
+      const coinData = { code: 'DOGE', name: null };
+      expect(CoinController.createCoin(coinData)).to.be.rejectedWith(Error, 'create_coin_unknown_error');
+    });
   });
 });

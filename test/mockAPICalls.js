@@ -16,6 +16,8 @@ mock
   .onGet(GetCoinPriceURL)
   .replyOnce(429, { error: 'you are rate limited' })
   .onGet(GetCoinPriceURL)
+  .replyOnce(500, { error: 'Internal Server Error' })
+  .onGet(GetCoinPriceURL)
   .reply(200, {
     id: 'doge',
     symbol: 'doge',

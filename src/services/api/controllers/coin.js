@@ -24,7 +24,7 @@ const CoinController = {
       .catch((err) => {
         console.log(err.errors[0].message);
         if (err.errors[0].message == 'code must be unique') return { error: 'coin_code_exists' };
-        else return { error: 'unknown_error' };
+        else return { error: 'create_coin_unknown_error' };
       });
 
     errors.assertExposable(coin.error === undefined, coin.error);

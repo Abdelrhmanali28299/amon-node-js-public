@@ -14,5 +14,14 @@
       "name": "Ethereum",
       "code": "ETH"
     }
+  },
+  {
+    "model": "Coin",
+    "data": {
+      "id": "26a05507-0395-447a-bbbb-000000000002",
+      "name": "Brave",
+      "code": "BRAVE",
+      "price": "157.0"
+    }
   }
 ]
